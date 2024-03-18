@@ -1,39 +1,41 @@
 def creer_echiquier():
-    """
-    Crée un tableau de valeurs de l'échiquier.
-    """
-    echiquier = [
-        [""] * 8 for _ in range(8)  # Créer un tableau vide de 8x8
-    ]
-    # Placer les pièces sur l'échiquier
-    echiquier[0] = ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"]  # Ligne supérieure pour les pièces noires
-    echiquier[1] = ["♟"] * 8  # Pions noirs
-    echiquier[2] = [" "] * 8  # Pions case vide
-    echiquier[3] = echiquier[2] 
-    echiquier[4] = echiquier[2]
-    echiquier[5] = echiquier[2]
-    echiquier[6] = ["♙"] * 8  # Pions blancs
-    echiquier[7] = ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"]  # Ligne inférieure pour les pièces blanches
-    return echiquier
-
-def afficher_echiquier(echiquier):
-    """
-    affiche un échiquier de type tableau dans la console.
-    echiquier   --tableau avec les pièces
-    """
-    taille = 8
-    
-    # Afficher les indices de colonne
-    print("    " + "   ".join(chr(ord('a') + i) for i in range(taille))) # la méthode join ça sert à concatener un string avec n'importe quoi fr. https://pythonbasics.org/join/
-    
-    # Afficher la ligne de séparation
-    print("  +" + "---+" * taille)
-    
-    # Afficher l'échiquier avec les pièces et les lignes de séparation
-    for i in range(taille):
-        # cf. https://he-arc.github.io/livre-python/fstrings/index.html pour une explication sur 'f'
-        print(f"{taille - i} |", end=" ")  # Afficher les indices de ligne (j'ai mis end pour ne pas qu'il y ait de saut de ligne entre colonnes => affichage plus compact)
-        for j in range(taille):
-            print(echiquier[i][j] + " |", end=" ")
-        print()
-        print("  +" + "---+" * taille)  # Afficher la ligne de séparation
+    t = []                                    # Tableau t
+    for loop in range(19):                    # Répéter 19 fois :
+        ligne = []                                # Tableau ligne dans t
+        for loop in range(19):                    # Répéter 19 fois :
+                ligne.append(" ")                     # Nouvel indice ayant pour valeur " "
+        t.append(ligne)                           # Nouvel indice ayant pour valeur un tableau ligne
+    for x in range(19):                       # Répéter 19 fois :
+        for y in range(19):                       # Répéter 19 fois :
+            if y%2 == 0:                              # Si le reste de y par 2 != à 0 :
+                t[x][y] = "|"                             # Dessine quadrillage vertical
+                y *= 3                                    # Décalage permettant le quadrillage (Multiplier par 3 à chaque boucle)
+            elif x%2 == 0 and t[x][y] == " ":         # Si le reste de x par 2 != à 0 et que la valeur = " " :
+                t[x][y] = "-"                             # Dessine quadrillage horizontal
+    for i in range(8):                        # Répéter 8 fois :
+        i += 1                                    # Ajouter 1 à chaque boucle
+        t[i*2-1][1] = 9-i                         # Affiche les coordonnées y (axe des ordonnées) 
+        t[17][i*2+1] = chr(ord("A")+i-1)          # Affiche les coordonnées x (axe des abscisses) 
+        t[3][i*2+1] = "♟︎"                        # Dessine Pion Noir
+        t[13][i*2+1] = "♙"                       # Dessine Pion Blanc
+    t[15][3] = "♖"                           # Dessine Tour Blanche Gauche
+    t[15][17] = "♖"                          # Dessine Tour Blanche Droite
+    t[15][5] = "♘"                           # Dessine Cavalier Blanc Gauche
+    t[15][15] = "♘"                          # Dessine Cavalier Blanc Droite
+    t[15][7] = "♗"                           # Dessine Fou Blanc Gauche
+    t[15][13] = "♗"                          # Dessine Fou Blanc Droite
+    t[15][9] = "♕"                           # Dessine Reine Blanche
+    t[15][11] = "♔"                          # Dessine Roi Blanc
+    t[1][3] = "♜"                            # Dessine Tour Noir Gauche
+    t[1][17] = "♜"                           # Dessine Tour Noir Droite
+    t[1][5] = "♞"                            # Dessine Cavalier Noir Gauche
+    t[1][15] = "♞"                           # Dessine Cavalier Noir Droite
+    t[1][7] = "♝"                            # Dessine Fou Noir Gauche
+    t[1][13] = "♝"                           # Dessine Fou Noir Droite
+    t[1][9] = "♚"                            # Dessine Roi Noir
+    t[1][11] = "♛"                           # Dessine Reine Blanche
+    for x in range(19):                       # Répéter 19 fois :
+        for y in range(19):                       # Répéter 19 fois :
+            print(t[x][y], end=" ")                   # Imprimer tableau ligne du tableau t
+        print()                                   # Imprimer Saut de ligne
+    return t                                  # Renvoyer t
