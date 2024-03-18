@@ -17,24 +17,23 @@ def creer_echiquier():
     return echiquier
 
 def afficher_echiquier(echiquier):
+    """
+    affiche un échiquier de type tableau dans la console.
+    echiquier   --tableau avec les pièces
+    """
     taille = 8
     
     # Afficher les indices de colonne
-    print("   " + "  " + chr(ord('a') + i) for i in range(taille))
+    print("    " + "   ".join(chr(ord('a') + i) for i in range(taille))) # la méthode join ça sert à concatener un string avec n'importe quoi fr. https://pythonbasics.org/join/
     
     # Afficher la ligne de séparation
     print("  +" + "---+" * taille)
     
     # Afficher l'échiquier avec les pièces et les lignes de séparation
     for i in range(taille):
+        # cf. https://he-arc.github.io/livre-python/fstrings/index.html pour une explication sur 'f'
         print(f"{taille - i} |", end=" ")  # Afficher les indices de ligne (j'ai mis end pour ne pas qu'il y ait de saut de ligne entre colonnes => affichage plus compact)
         for j in range(taille):
             print(echiquier[i][j] + " |", end=" ")
         print()
         print("  +" + "---+" * taille)  # Afficher la ligne de séparation
-
-# Appeler la fonction pour créer l'échiquier
-echiquier = creer_echiquier()
-
-# Afficher l'échiquier
-afficher_echiquier(echiquier)
