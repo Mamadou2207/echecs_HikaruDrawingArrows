@@ -1,0 +1,16 @@
+tour_bg = "♖"     # Tour Blanche Gauche
+tour_bd = "♖"     # Tour Blanche Droite
+cavalier_bg = "♘" # Cavalier Blanc Gauche
+cavalier_bd = "♘" # Cavalier Blanc Droite
+fou_bg = "♗"      # Fou Blanc Gauche
+fou_bd = "♗"      # Fou Blanc Droite
+reine_b = "♕"     # Reine Blanche
+roi_b = "♔"       # Roi Blanc
+tour_ng = "♜"     # Tour Noir Gauche
+tour_nd = "♜"     # Tour Noir Droite
+cavalier_ng = "♞" # Cavalier Noir Gauche
+cavalier_nd = "♞" # Cavalier Noir Droite
+fou_ng = "♝"      # Fou Noir Gauche
+fou_nd = "♝"      # Fou Noir Droite
+reine_n = "♚"     # Roi Noir
+roi_n = "♛"       # Reine Blanche
