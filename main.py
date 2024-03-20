@@ -43,9 +43,12 @@ def creer_echiquier(echiquier):
     echiquier[1][9] = variables.roi_n           # Dessine Roi Noir
     echiquier[1][11] = variables.reine_n        # Dessine Reine Blanche
 
+joueur1 = input("Nom Joueur 1 : ")
+joueur2 = input("Nom Joueur 2 : ")
+print(joueur1) # Demande le nom du joueur 1
+print(joueur2) # Demande le nom du joueur 2
+
 def tour_joueur():
-    joueur1 = input("Nom Joueur 1 : ")             # Demande le nom du joueur 1
-    joueur2 = input("Nom Joueur 2 : ")             # Demande le nom du joueur 2
     prochain_tour = joueur1                        # Donne le tour au joueur 1
     if prochain_tour == joueur1:                   # Si le prochain tour est au joueur 1 :
         print(f"C'est le tour de {prochain_tour}")     # Indique à qui est le tour
@@ -155,7 +158,7 @@ dico_coords = {                 # Base de données contenant toutes les coordonn
 }
 
 # TEST :
-print(dico_coords["D"]["1"])
+# print(dico_coords["D"]["1"])
 
 def est_majuscule(caractere):
     """Vérifie si un caractère est majuscule ou non
@@ -166,7 +169,7 @@ def est_majuscule(caractere):
     Returns:
         (bool): True or False
     """
-    return "A" <= caractere <= "Z" # Vérifie si l'encodage UTF-8 du caractère est entre A et Z
+    return "A" <= caractere <= "H" # Vérifie si l'encodage UTF-8 du caractère est entre A et H
 
 def est_chiffre(caractere):
     """Vérifie si un caractère est chiffre ou non
@@ -177,13 +180,13 @@ def est_chiffre(caractere):
     Returns:
         (bool): True of False
     """
-    return '0' <= caractere <= '9' # Vérifie si l'encodage UTF-8 du caractère est entre 0 et 9
+    return '1' <= caractere <= '8' # Vérifie si l'encodage UTF-8 du caractère est entre 1 et 8
     
 def reco_coordonnees(coordonnees):
     """Interprète une chaine de caractère pour déterminer la position dans le dictionnaire
 
     Args:
-        coordonnees (str): x et y
+        coordonnees (str): Indices x et y de l'échiquier
     
     Returns:
         (list): Dictionnaire à 2 dimensions 
@@ -192,16 +195,21 @@ def reco_coordonnees(coordonnees):
     y = coordonnees[1]       # Attribue le deuxième caractere de la chaine à la variable y
     est_majuscule(x)         # Vérifie si y est un nombre
     est_chiffre(y)           # Vérifie si y est un chiffre
-    return dico_coords[x][y] # Renvoie les indices correspondant aux coordonnées
+    return dico_coords[x][y] # Renvoie les indices de l'échiquier correspondant aux coordonnées     
 
 # TEST :
-print(reco_coordonnees("D8"))
+# print(reco_coordonnees(input("Coordonnées : ")))
 
 def deplacer(pos1, pos2):
     pos1 = reco_coordonnees(pos1)
     pos2 = reco_coordonnees(pos2)
     pos2 = pos1
     pos1 = " "
+    return echiquier
+
+# TEST :
+deplacer("D8", "A6")
+# afficher_echiquier(echiquier)
 
 def deplacement(nom_piece, x1, y1, x2, y2, t):
 
@@ -228,6 +236,6 @@ def deplacement(nom_piece, x1, y1, x2, y2, t):
     #elif nom_piece == variables.reine_b:
 
 # TEST :
-deplacement(variables.pion_b, 13, 3, 11,3, echiquier)
+# deplacement(variables.pion_b, 13, 3, 11,3, echiquier)
 # deplacement(variables.pion_b, 13, 3, 9, 3, echiquier)
-afficher_echiquier(echiquier)
+# afficher_echiquier(echiquier)
