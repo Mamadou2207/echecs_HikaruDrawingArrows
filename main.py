@@ -194,7 +194,7 @@ def reco_coordonnees(coordonnees):
     est_chiffre(y)           # Vérifie si y est un chiffre
     return dico_coords[x][y] # Renvoie les indices correspondant aux coordonnées
 
-# TEST :
+# TEST 2 :
 print(reco_coordonnees("D8"))
 
 def deplacer(x1,y1,x2,y2,t):
