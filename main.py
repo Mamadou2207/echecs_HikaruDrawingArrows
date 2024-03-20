@@ -1,4 +1,4 @@
-import variables_pieces
+import variables
 
 echiquier = [] # Tableau représentant l'échiquier
 
@@ -24,24 +24,24 @@ def creer_echiquier(echiquier):
         i += 1                                             # Ajouter 1 à chaque boucle
         echiquier[i*2-1][1] = 9-i                          # Affiche les coordonnées y (axe des ordonnées) 
         echiquier[17][i*2+1] = chr(ord("A")+i-1)           # Affiche les coordonnées x (axe des abscisses) 
-        echiquier[3][i*2+1] = variables_pieces.pion_n      # Dessine Pion Noir
-        echiquier[13][i*2+1] = variables_pieces.pion_b     # Dessine Pion Blanc
-    echiquier[15][3] = variables_pieces.tour_b         # Dessine Tour Blanche Gauche
-    echiquier[15][17] = variables_pieces.tour_b        # Dessine Tour Blanche Droite
-    echiquier[15][5] = variables_pieces.cavalier_b     # Dessine Cavalier Blanc Gauche
-    echiquier[15][15] = variables_pieces.cavalier_b    # Dessine Cavalier Blanc Droite
-    echiquier[15][7] = variables_pieces.fou_b          # Dessine Fou Blanc Gauche
-    echiquier[15][13] = variables_pieces.fou_b         # Dessine Fou Blanc Droite
-    echiquier[15][9] = variables_pieces.reine_b        # Dessine Reine Blanche
-    echiquier[15][11] = variables_pieces.roi_b         # Dessine Roi Blanc
-    echiquier[1][3] = variables_pieces.tour_n          # Dessine Tour Noir Gauche
-    echiquier[1][17] = variables_pieces.tour_n         # Dessine Tour Noir Droite
-    echiquier[1][5] = variables_pieces.cavalier_n      # Dessine Cavalier Noir Gauche
-    echiquier[1][15] = variables_pieces.cavalier_n     # Dessine Cavalier Noir Droite
-    echiquier[1][7] = variables_pieces.fou_n           # Dessine Fou Noir Gauche
-    echiquier[1][13] = variables_pieces.fou_n          # Dessine Fou Noir Droite
-    echiquier[1][9] = variables_pieces.roi_n           # Dessine Roi Noir
-    echiquier[1][11] = variables_pieces.reine_n        # Dessine Reine Blanche
+        echiquier[3][i*2+1] = variables.pion_n      # Dessine Pion Noir
+        echiquier[13][i*2+1] = variables.pion_b     # Dessine Pion Blanc
+    echiquier[15][3] = variables.tour_b         # Dessine Tour Blanche Gauche
+    echiquier[15][17] = variables.tour_b        # Dessine Tour Blanche Droite
+    echiquier[15][5] = variables.cavalier_b     # Dessine Cavalier Blanc Gauche
+    echiquier[15][15] = variables.cavalier_b    # Dessine Cavalier Blanc Droite
+    echiquier[15][7] = variables.fou_b          # Dessine Fou Blanc Gauche
+    echiquier[15][13] = variables.fou_b         # Dessine Fou Blanc Droite
+    echiquier[15][9] = variables.reine_b        # Dessine Reine Blanche
+    echiquier[15][11] = variables.roi_b         # Dessine Roi Blanc
+    echiquier[1][3] = variables.tour_n          # Dessine Tour Noir Gauche
+    echiquier[1][17] = variables.tour_n         # Dessine Tour Noir Droite
+    echiquier[1][5] = variables.cavalier_n      # Dessine Cavalier Noir Gauche
+    echiquier[1][15] = variables.cavalier_n     # Dessine Cavalier Noir Droite
+    echiquier[1][7] = variables.fou_n           # Dessine Fou Noir Gauche
+    echiquier[1][13] = variables.fou_n          # Dessine Fou Noir Droite
+    echiquier[1][9] = variables.roi_n           # Dessine Roi Noir
+    echiquier[1][11] = variables.reine_n        # Dessine Reine Blanche
 
 def tour_joueur():
     joueur1 = input("Nom Joueur 1 : ")             # Demande le nom du joueur 1
@@ -194,38 +194,40 @@ def reco_coordonnees(coordonnees):
     est_chiffre(y)           # Vérifie si y est un chiffre
     return dico_coords[x][y] # Renvoie les indices correspondant aux coordonnées
 
-# TEST 2 :
+# TEST :
 print(reco_coordonnees("D8"))
 
-def deplacer(x1,y1,x2,y2,t):
-    t[x2][y2] = t[x1][y1]
-    t[x1][y1] = " "
+def deplacer(pos1, pos2):
+    pos1 = reco_coordonnees(pos1)
+    pos2 = reco_coordonnees(pos2)
+    pos2 = pos1
+    pos1 = " "
 
 def deplacement(nom_piece, x1, y1, x2, y2, t):
 
-    if nom_piece == variables_pieces.pion_b:
+    if nom_piece == variables.pion_b:
         
         if x2 == x1-2 and y2 == y1 :        #compare les indices 
             deplacer(x1, y1, x2, y2, t)
         else :
             print("tu ne peut pas déplacer le pion blanc ici") 
-    elif nom_piece == variables_pieces.pion_n:
+    elif nom_piece == variables.pion_n:
         if x2 == x1+2 and y2 == y1 :        #compare les indices 
             deplacer(x1, y1, x2, y2, t)
         else :
             print("tu ne peut pas déplacer le pion noir ici") 
-    #elif nom_piece == variables_pieces.tour_b:
-    #elif nom_piece == variables_pieces.tour_n:
-    #elif nom_piece == variables_pieces.cavalier_b:
-    #elif nom_piece == variables_pieces.cavalier_n:
-    #elif nom_piece == variables_pieces.fou_b:
-    #elif nom_piece == variables_pieces.fou_n:
-    #elif nom_piece == variables_pieces.reine_b:
-    #elif nom_piece == variables_pieces.reine_n:
-    #elif nom_piece == variables_pieces.roi_b:
-    #elif nom_piece == variables_pieces.reine_b:
+    #elif nom_piece == variables.tour_b:
+    #elif nom_piece == variables.tour_n:
+    #elif nom_piece == variables.cavalier_b:
+    #elif nom_piece == variables.cavalier_n:
+    #elif nom_piece == variables.fou_b:
+    #elif nom_piece == variables.fou_n:
+    #elif nom_piece == variables.reine_b:
+    #elif nom_piece == variables.reine_n:
+    #elif nom_piece == variables.roi_b:
+    #elif nom_piece == variables.reine_b:
 
 # TEST :
-deplacement(variables_pieces.pion_b, 13, 3, 11,3, echiquier)
-# deplacement(variables_pieces.pion_b, 13, 3, 9, 3, echiquier)
+deplacement(variables.pion_b, 13, 3, 11,3, echiquier)
+# deplacement(variables.pion_b, 13, 3, 9, 3, echiquier)
 afficher_echiquier(echiquier)
