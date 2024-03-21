@@ -9,7 +9,7 @@ coords = {                      # Base de données contenant toutes les coordonn
         "7":{"x": 3, "y": 3},   # A7
         "8":{"x": 1, "y": 3}    # A8
     },
-"B":{
+    "B":{
         "1":{"x": 15, "y": 5},  # B1
         "2":{"x": 13, "y": 5},  # B2
         "3":{"x": 11, "y": 5},  # B3
