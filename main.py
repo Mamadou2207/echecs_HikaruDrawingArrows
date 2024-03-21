@@ -4,16 +4,16 @@ echiquier = []     # Tableau représentant l'échiquier
 fin_partie = False # Faux tant que la partie continue
 
 def creer_echiquier(echiquier):
-    """Crée un échiquier à l'aide d'un tableau t
+    """Crée un échiquier à l'aide d'un tableau à 2 dimensions
 
     Args:
         echiquier (list): Tableau à 2 dimensions
     """
     for loop in range(19):                             # Répéter 19 fois :
-        ligne = []                                         # Tableau ligne dans t
+        ligne = []                                         # Tableau ligne dans echiquier
         for loop in range(19):                             # Répéter 19 fois :
                 ligne.append(" ")                              # Nouvel indice ayant pour valeur " "
-        echiquier.append(ligne)                            # Nouvel indice du tableau t ayant pour valeur un tableau ligne
+        echiquier.append(ligne)                            # Nouvel indice du tableau echiquier ayant pour valeur un tableau ligne
     for x in range(19):                                # Répéter 19 fois :
         for y in range(19):                                # Répéter 19 fois :
             if y%2 == 0:                                       # Si le reste de y par 2 != à 0 :
@@ -114,12 +114,12 @@ def afficher_echiquier(echiquier):
     Args:
         echiquier (list): Tableau à 2 dimensions
     """
-    for x in range(19):                                                # Répéter 19 fois :
-        for y in range(19):                                                # Répéter 19 fois :
-            print(echiquier[x][y], end=" ")                                    # Imprimer tableau ligne du tableau t
-        print()                                                            # Imprimer Saut de ligne
-    tour_joueur(joueur1, joueur2, prochain_tour)                       # Appel de la fonction tour_joueur
-    return echiquier                                                   # Renvoyer t
+    for x in range(19):                     # Répéter 19 fois :
+        for y in range(19):                     # Répéter 19 fois :
+            print(echiquier[x][y], end=" ")         # Imprimer tableau ligne du tableau echiquier
+        print()                                 # Imprimer Saut de ligne
+    tour_joueur()                           # Appel de la fonction tour_joueur
+    return echiquier                        # Renvoyer échiquier
 
 # TEST :
 creer_echiquier(echiquier)    # Crée un échiquier avec les pièces à leur positions par défaut
@@ -251,7 +251,7 @@ def reco_coordonnees(coordonnees):
 # TEST :
 # print(reco_coordonnees(input("Coordonnées : ")))
 
-""" NON OPERATIONNEL
+""" NON OPERATIONNEL :
 def deplacer(pos1, pos2):
     pos1 = reco_coordonnees(pos1)
     pos2 = reco_coordonnees(pos2)
