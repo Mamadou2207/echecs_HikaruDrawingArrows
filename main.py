@@ -114,12 +114,12 @@ def afficher_echiquier(echiquier):
     Args:
         echiquier (list): Tableau à 2 dimensions
     """
-    for x in range(19):                     # Répéter 19 fois :
-        for y in range(19):                     # Répéter 19 fois :
-            print(echiquier[x][y], end=" ")         # Imprimer tableau ligne du tableau echiquier
-        print()                                 # Imprimer Saut de ligne
-    tour_joueur()                           # Appel de la fonction tour_joueur
-    return echiquier                        # Renvoyer échiquier
+    for x in range(19):                          # Répéter 19 fois :
+        for y in range(19):                          # Répéter 19 fois :
+            print(echiquier[x][y], end=" ")              # Imprimer tableau ligne du tableau echiquier
+        print()                                      # Imprimer Saut de ligne
+    tour_joueur(joueur1, joueur2, prochain_tour) # Appel de la fonction tour_joueur
+    return echiquier                             # Renvoyer échiquier
 
 # TEST :
 creer_echiquier(echiquier)    # Crée un échiquier avec les pièces à leur positions par défaut
