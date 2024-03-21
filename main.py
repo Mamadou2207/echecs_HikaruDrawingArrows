@@ -166,30 +166,39 @@ def reco_coordonnees(coordonnees):
 # TEST :
 print(reco_coordonnees("D8"))
 
-"""
 def deplacer(pos1, pos2, echiquier):
-    pos1 = reco_coordonnees(pos1)
-    pos2 = reco_coordonnees(pos2)
-    pos2 = pos1
-    pos1 = " "
-    return echiquier
+    """Déplace une pièce d'un point A à un point B sur l'échiquier
 
+    Args:
+        pos1 (str): Coordonnées du point A
+        pos2 (str): Coordonnées du point B
+        echiquier (list): Tableau à 2 dimensions
+
+    Returns:
+        (list): Renvoie le déplacement de la pièce sur l'échiquier
+    """
+    pos1 = reco_coordonnees(pos1)                                                     # Récupère les indices de l'échiquier correspondant au point A
+    pos2 = reco_coordonnees(pos2)                                                     # Récupère les indices de l'échiquier correspondant au point B
+    echiquier[pos2.get("x")][pos2.get("y")] = echiquier[pos1.get("x")][pos1.get("y")] # Valeur du point B devient celle du point A
+    echiquier[pos1.get("x")][pos1.get("y")] = " "                                     # Supprime la pièce du Point A
+    return echiquier                                                                  # Renvoie l'échiquier après le déplacement de la pièce
+    
 # TEST :
 deplacer(input("Point A : "), input("Point B : "), echiquier)
 afficher_echiquier(echiquier)
-"""
-def deplacer(x1, y1, x2, y2, echiquier):
-    """Déplace une pièce d'un point A à un point B
 
-    Args:
-        x1 (int): Coordonnée x du point A
-        y1 (int): Coordonnée x du point B
-        x2 (int): Coordonnée y du point A
-        y2 (int): Coordonnée y du point B
-        echiquier (list): Tableau à 2 dimensions
-    """
-    echiquier[x2][y2] = echiquier[x1][y1] # Valeur point B devient valeur point A
-    echiquier[x1][y1] = " "               # Valeur point A devient "nulle"
+#def deplacer(x1, y1, x2, y2, echiquier):
+#    """Déplace une pièce d'un point A à un point B
+#
+#    Args:
+#        x1 (int): Coordonnée x du point A
+#        y1 (int): Coordonnée x du point B
+#        x2 (int): Coordonnée y du point A
+#        y2 (int): Coordonnée y du point B
+#        echiquier (list): Tableau à 2 dimensions
+#    """
+#    echiquier[x2][y2] = echiquier[x1][y1] # Valeur point B devient valeur point A
+#    echiquier[x1][y1] = " "               # Valeur point A devient "nulle"
     
 def verif(axe, point):
     """Vérifie que le point existe
