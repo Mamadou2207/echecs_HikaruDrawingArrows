@@ -1,4 +1,5 @@
 import variables
+import dictionnaires
 
 echiquier = []     # Tableau représentant l'échiquier
 fin_partie = False # Faux tant que la partie continue
@@ -44,9 +45,9 @@ def creer_echiquier(echiquier):
     echiquier[1][9] = variables.roi_n           # Dessine Roi Noir
     echiquier[1][11] = variables.reine_n        # Dessine Reine Blanche
 
-joueur1 = input("Nom Joueur 1 : ")    # Demande le nom du Joueur 1
-joueur2 = input("Nom Joueur 2 : ")    # Demande le nom du Joueur 2
-prochain_tour = joueur1               # Donne le tour au Joueur 1
+joueur1 = input("Nom Joueur 1 : ") # Demande le nom du Joueur 1
+joueur2 = input("Nom Joueur 2 : ") # Demande le nom du Joueur 2
+prochain_tour = joueur1            # Donne le tour au Joueur 1
 
 def tour_joueur(joueur1, joueur2, prochain_tour):
     """Système de tour par tour
@@ -125,92 +126,6 @@ def afficher_echiquier(echiquier):
 creer_echiquier(echiquier)    # Crée un échiquier avec les pièces à leur positions par défaut
 afficher_echiquier(echiquier) # Affiche l'échiquier sur la console python
 
-dico_coords = {                 # Base de données contenant toutes les coordonnées possibles
-    "A":{
-        "1": echiquier[15][3],  # A1
-        "2": echiquier[13][3],  # A2
-        "3": echiquier[11][3],  # A3
-        "4": echiquier[9][3],   # A4
-        "5": echiquier[7][3],   # A5
-        "6": echiquier[5][3],   # A6
-        "7": echiquier[3][3],   # A7
-        "8": echiquier[1][3]    # A8
-    },
-    "B":{
-        "1": echiquier[15][5],  # B1
-        "2": echiquier[13][5],  # B2
-        "3": echiquier[11][5],  # B3
-        "4": echiquier[9][5],   # B4
-        "5": echiquier[7][5],   # B5
-        "6": echiquier[5][5],   # B6
-        "7": echiquier[3][5],   # B7
-        "8": echiquier[1][5]    # B8
-    },
-    "C":{
-        "1": echiquier[15][7],  # C1
-        "2": echiquier[13][7],  # C2
-        "3": echiquier[11][7],  # C3
-        "4": echiquier[9][7],   # C4
-        "5": echiquier[7][7],   # C5
-        "6": echiquier[5][7],   # C6
-        "7": echiquier[3][7],   # C7
-        "8": echiquier[1][7]    # C8
-    },
-    "D":{
-        "1": echiquier[15][9],  # D1
-        "2": echiquier[13][9],  # D2
-        "3": echiquier[11][9],  # D3
-        "4": echiquier[9][9],   # D4
-        "5": echiquier[7][9],   # D5
-        "6": echiquier[5][9],   # D6
-        "7": echiquier[3][9],   # D7
-        "8": echiquier[1][9]    # D8
-    },
-    "E":{
-        "1": echiquier[15][11], # E1
-        "2": echiquier[13][11], # E2
-        "3": echiquier[11][11], # E3
-        "4": echiquier[9][11],  # E4
-        "5": echiquier[7][11],  # E5
-        "6": echiquier[5][11],  # E6
-        "7": echiquier[3][11],  # E7
-        "8": echiquier[1][11]   # E8
-    },
-    "F":{
-        "1": echiquier[15][13], # F1
-        "2": echiquier[13][13], # F2
-        "3": echiquier[11][13], # F3
-        "4": echiquier[9][13],  # F4
-        "5": echiquier[7][13],  # F5
-        "6": echiquier[5][13],  # F6
-        "7": echiquier[3][13],  # F7
-        "8": echiquier[1][13]   # F8
-    },
-    "G":{
-        "1": echiquier[15][15], # G1
-        "2": echiquier[13][15], # G2
-        "3": echiquier[11][15], # G3
-        "4": echiquier[9][15],  # G4
-        "5": echiquier[7][15],  # G5
-        "6": echiquier[5][15],  # G6
-        "7": echiquier[3][15],  # G7
-        "8": echiquier[1][15]   # G8
-    },
-    "H":{
-        "1": echiquier[15][17], # H1
-        "2": echiquier[13][17], # H2
-        "3": echiquier[11][17], # H3
-        "4": echiquier[9][17],  # H4
-        "5": echiquier[7][17],  # H5
-        "6": echiquier[5][17],  # H6
-        "7": echiquier[3][17],  # H7
-        "8": echiquier[1][17]   # H8
-    }
-}
-
-# TEST :
-# print(dico_coords["D"]["1"])
-
 def est_majuscule(caractere):
     """Vérifie si un caractère est majuscule ou non
 
@@ -242,24 +157,27 @@ def reco_coordonnees(coordonnees):
     Returns:
         (list): Dictionnaire à 2 dimensions 
     """
-    x = coordonnees[0]       # Attribue le premier caractere de la chaine à la variable x
-    y = coordonnees[1]       # Attribue le deuxième caractere de la chaine à la variable y
-    est_majuscule(x)         # Vérifie si y est un nombre
-    est_chiffre(y)           # Vérifie si y est un chiffre
-    return dico_coords[x][y] # Renvoie les indices de l'échiquier correspondant aux coordonnées     
+    x = coordonnees[0]                        # Attribue le premier caractere de la chaine à la variable x
+    y = coordonnees[1]                        # Attribue le deuxième caractere de la chaine à la variable y
+    est_majuscule(x)                          # Vérifie si y est un nombre
+    est_chiffre(y)                            # Vérifie si y est un chiffre
+    return dictionnaires.coords.get(x).get(y) # Renvoie les indices de l'échiquier correspondant aux coordonnées
 
 # TEST :
-# print(reco_coordonnees(input("Coordonnées : ")))
+print(reco_coordonnees("D8"))
 
-""" NON OPERATIONNEL :
-def deplacer(pos1, pos2):
+"""
+def deplacer(pos1, pos2, echiquier):
     pos1 = reco_coordonnees(pos1)
     pos2 = reco_coordonnees(pos2)
     pos2 = pos1
     pos1 = " "
     return echiquier
-"""
 
+# TEST :
+deplacer(input("Point A : "), input("Point B : "), echiquier)
+afficher_echiquier(echiquier)
+"""
 def deplacer(x1, y1, x2, y2, echiquier):
     """Déplace une pièce d'un point A à un point B
 
@@ -270,8 +188,8 @@ def deplacer(x1, y1, x2, y2, echiquier):
         y2 (int): Coordonnée y du point B
         echiquier (list): Tableau à 2 dimensions
     """
-    echiquier[x2][y2] = echiquier[x1][y1] # valeur point B devient valeur point A
-    echiquier[x1][y1] = " "               # valeur point A devient "nulle"
+    echiquier[x2][y2] = echiquier[x1][y1] # Valeur point B devient valeur point A
+    echiquier[x1][y1] = " "               # Valeur point A devient "nulle"
     
 def verif(axe, point):
     """Vérifie que le point existe
@@ -303,7 +221,6 @@ def condition_tour_verticale(x2, y1, y2):
         return True                                           # Renvoyer Vrai
     else:                                                 # Sinon :
         return False                                          # Renvoyer Faux
-
 
 def condition_tour_horizontale(y2, x1, x2):
     """Conditionne le déplacement à l'horizontal
