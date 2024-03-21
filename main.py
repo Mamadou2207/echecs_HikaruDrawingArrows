@@ -1,6 +1,7 @@
 import variables
 
-echiquier = [] # Tableau représentant l'échiquier
+echiquier = []     # Tableau représentant l'échiquier
+fin_partie = False # Faux tant que la partie continue
 
 def creer_echiquier(echiquier):
     """Crée un échiquier à l'aide d'un tableau t
@@ -113,12 +114,12 @@ def afficher_echiquier(echiquier):
     Args:
         echiquier (list): Tableau à 2 dimensions
     """
-    for x in range(19):                     # Répéter 19 fois :
-        for y in range(19):                     # Répéter 19 fois :
-            print(echiquier[x][y], end=" ")         # Imprimer tableau ligne du tableau t
-        print()                                 # Imprimer Saut de ligne
-    tour_joueur()                           # Appel de la fonction tour_joueur
-    return echiquier                        # Renvoyer t
+    for x in range(19):                                                # Répéter 19 fois :
+        for y in range(19):                                                # Répéter 19 fois :
+            print(echiquier[x][y], end=" ")                                    # Imprimer tableau ligne du tableau t
+        print()                                                            # Imprimer Saut de ligne
+    tour_joueur(joueur1, joueur2, prochain_tour)                       # Appel de la fonction tour_joueur
+    return echiquier                                                   # Renvoyer t
 
 # TEST :
 creer_echiquier(echiquier)    # Crée un échiquier avec les pièces à leur positions par défaut
@@ -219,7 +220,7 @@ def est_majuscule(caractere):
     Returns:
         (bool): True or False
     """
-    return "A" <= caractere <= "H" # Vérifie si l'encodage UTF-8 du caractère est entre A et H
+    return 'A' <= caractere <= 'H' # Vérifie si l'encodage UTF-8 du caractère est entre A et H
 
 def est_chiffre(caractere):
     """Vérifie si un caractère est chiffre ou non
@@ -250,7 +251,7 @@ def reco_coordonnees(coordonnees):
 # TEST :
 # print(reco_coordonnees(input("Coordonnées : ")))
 
-""" Non opérationnel
+""" NON OPERATIONNEL
 def deplacer(pos1, pos2):
     pos1 = reco_coordonnees(pos1)
     pos2 = reco_coordonnees(pos2)
