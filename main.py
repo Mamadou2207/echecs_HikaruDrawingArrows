@@ -259,17 +259,21 @@ def deplacement(piece, pos1, pos2, echiquier):
         pos2 (int): Point B
         echiquier (list): Tableau à 2 dimensions
     """
-    a = reco_coordonnees(pos1)                                                       # Récupère les indices de l'échiquier correspondant au point A
-    b = reco_coordonnees(pos2)                                                       # Récupère les indices de l'échiquier correspondant au point B
-    if piece == variables.pion_b:                                                    # Si la pièce déplacé est un Pion Blanc :
-        if echiquier[b.get("x")+2][b.get("y")] == echiquier[a.get("x")][a.get("y")]:     # Si 
-            deplacer(pos1, pos2, echiquier)                                                                    # Déplace la pièce du point A au point B
-            # Non terminé (il manque le +2 quand il n'a pas bougé, le fait de manger une pièce en diagonale et le "en passant")
-        else:                                                                                          # Sinon :
-            print("Tu ne peux pas déplacer le Pion Blanc ici")                                             # Afficher message d'erreur
+    a = reco_coordonnees(pos1)                                                                                                                                                 # Récupère les indices de l'échiquier correspondant au point A
+    b = reco_coordonnees(pos2)                                                                                                                                                 # Récupère les indices de l'échiquier correspondant au point B
+    if piece == variables.pion_b:                                                                                                                                              # Si la pièce déplacé est un Pion Blanc :
+        if echiquier[b.get("x")+2][b.get("y")] == echiquier[a.get("x")][a.get("y")]:                                                                                               # Si x2 = x1 et y2 - 1 = y1 :
+            deplacer(pos1, pos2, echiquier)                                                                                                                                            # Autoriser le déplacement
+        elif echiquier[b.get("x")+4][b.get("y")] == echiquier[13][a.get("y")]:                                                                                                     # Si x2 = x1 et y2 - 2 = y1 :
+            deplacer(pos1, pos2, echiquier)                                                                                                                                            # Autoriser le déplacement
+        elif echiquier[b.get("x")+2][b.get("y")-2] or echiquier[b.get("x")+2][b.get("y")+2] == echiquier[a.get("x")][a.get("y")] and echiquier[b.get("x")][b.get("y")] != " ":     # Si x2 - 1 = x1 et y2 - 1 = y1 OU x2 + 1 = x1 et y2 - 1 = y1 ET que le point B n'est pas vide :
+            deplacer(pos1, pos2, echiquier)                                                                                                                                            # Autoriser le déplacement
+            # Non terminé (il manque, le "en passant")
+        else:                                                                                                                                                                      # Sinon :
+            print("Tu ne peux pas déplacer le Pion Blanc ici")                                                                                                                         # Afficher message d'erreur
 
 # TEST :
-deplacement(variables.pion_b, "A2", "A3", echiquier)
+deplacement(variables.pion_b, "A2", "B3", echiquier)
 afficher_echiquier(echiquier)
 
 #def deplacement(piece, x1, y1, x2, y2, echiquier):
