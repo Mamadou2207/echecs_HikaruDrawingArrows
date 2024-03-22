@@ -271,9 +271,19 @@ def deplacement(piece, pos1, pos2, echiquier):
             # Non terminé (il manque, le "en passant")
         else:                                                                                                                                                                      # Sinon :
             print("Tu ne peux pas déplacer le Pion Blanc ici")                                                                                                                         # Afficher message d'erreur
+    if piece == variables.pion_n:                                                                                                                                              # Si la pièce déplacé est un Pion Noir :
+        if echiquier[b.get("x")-2][b.get("y")] == echiquier[a.get("x")][a.get("y")]:                                                                                               # Si x2 = x1 et y2 + 1 = y1 :
+            deplacer(pos1, pos2, echiquier)                                                                                                                                            # Autoriser le déplacement
+        elif echiquier[b.get("x")-4][b.get("y")] == echiquier[3][a.get("y")]:                                                                                                     # Si x2 = x1 et y2 + 2 = y1 :
+            deplacer(pos1, pos2, echiquier)                                                                                                                                            # Autoriser le déplacement
+        elif echiquier[b.get("x")-2][b.get("y")-2] or echiquier[b.get("x")-2][b.get("y")+2] == echiquier[a.get("x")][a.get("y")] and echiquier[b.get("x")][b.get("y")] != " ":     # Si x2 - 1 = x1 et y2 + 1 = y1 OU x2 + 1 = x1 et y2 + 1 = y1 ET que le point B n'est pas vide :
+            deplacer(pos1, pos2, echiquier)                                                                                                                                            # Autoriser le déplacement
+            # Non terminé (il manque, le "en passant")
+        else:                                                                                                                                                                      # Sinon :
+            print("Tu ne peux pas déplacer le Pion Noir ici")                                                                                                                         # Afficher message d'erreur
 
 # TEST :
-deplacement(variables.pion_b, "A2", "B3", echiquier)
+deplacement(variables.pion_b, "A2", "A8", echiquier)
 afficher_echiquier(echiquier)
 
 #def deplacement(piece, x1, y1, x2, y2, echiquier):
