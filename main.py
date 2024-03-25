@@ -280,7 +280,7 @@ def condition_tour_horizontale(pos1, pos2):
         return True                                                                          # Renvoyer Vrai
     return False                                                                         # Sinon renvoyer Faux
 
-def condtion_fou_diagonale(pos1, pos2):
+def condition_fou_diagonale(pos1, pos2):
     """Conditionne le déplacement du fou
 
     Args:
@@ -391,22 +391,22 @@ def deplacement(pos1, pos2, echiquier):
             else:                                                                                                                                                                          # Sinon :
                 print("Tu ne peux pas déplacer le Tour Noir ici")                                                                                                                              # Afficher message d'erreur
         if piece == variables.fou_b :                                                                                                                                                  # Si la pièce déplacé est un Fou Blanc :
-            if condtion_fou_diagonale(pos1, pos2) :                                                                                                                                        # Si les conditions sont vrai :
+            if condition_fou_diagonale(pos1, pos2) :                                                                                                                                        # Si les conditions sont vrai :
                 deplacer(pos1, pos2, echiquier)                                                                                                                                                # Déplace la pièce du point A au point B
             else:                                                                                                                                                                          # Sinon :
                 print("Tu ne peux pas déplacer le Fou Blanc ici")                                                                                                                              # Afficher message d'erreur
         if piece == variables.fou_n :                                                                                                                                                  # Si la pièce déplacé est un Fou Noir :
-            if condtion_fou_diagonale(pos1, pos2) :                                                                                                                                        # Si les conditions sont vrai :
+            if condition_fou_diagonale(pos1, pos2) :                                                                                                                                        # Si les conditions sont vrai :
                 deplacer(pos1, pos2, echiquier)                                                                                                                                                # Déplace la pièce du point A au point B
             else:                                                                                                                                                                          # Sinon :
                 print("Tu ne peux pas déplacer le Fou Noir ici")                                                                                                                               # Afficher message d'erreur
         if piece == variables.reine_b:                                                                                                                                                 # Si la pièce déplacé est un Reine Blanc :
-            if condtion_fou_diagonale(pos1, pos2) or condition_tour_verticale(pos1, pos2) or condition_tour_horizontale(pos1, pos2) :                                                      # Si les conditions sont vrai :
+            if condition_fou_diagonale(pos1, pos2) or condition_tour_verticale(pos1, pos2) or condition_tour_horizontale(pos1, pos2) :                                                      # Si les conditions sont vrai :
                 deplacer(pos1, pos2, echiquier)                                                                                                                                                # Déplace la pièce du point A au point B
             else:                                                                                                                                                                          # Sinon :
                 print("Tu ne peux pas déplacer la Reine Blanche ici")                                                                                                                          # Afficher message d'erreur    
         if piece == variables.reine_n:                                                                                                                                                 # Si la pièce déplacé est un Reine Noir :
-            if condtion_fou_diagonale(pos1, pos2) or condition_tour_verticale(pos1, pos2) or condition_tour_horizontale(pos1, pos2) :                                                      # Si les conditions sont vrai :
+            if condition_fou_diagonale(pos1, pos2) or condition_tour_verticale(pos1, pos2) or condition_tour_horizontale(pos1, pos2) :                                                      # Si les conditions sont vrai :
                 deplacer(pos1, pos2, echiquier)                                                                                                                                                # Déplace la pièce du point A au point B
             else:                                                                                                                                                                          # Sinon :
                 print("Tu ne peux pas déplacer la Reine Noir ici")                                                                                                                             # Afficher message d'erreur
