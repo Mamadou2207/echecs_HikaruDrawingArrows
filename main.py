@@ -210,11 +210,10 @@ def deplacer(pos1, pos2, echiquier):
     echiquier[pos1.get("x")][pos1.get("y")] = " "                                     # Supprime la pièce du Point A
     return echiquier                                                                  # Renvoie l'échiquier après le déplacement de la pièce
 
-def condition_pion(piece, pos1, pos2, echiquier):
+def condition_pion(pos1, pos2, echiquier):
     """Conditionne le déplacement du pion
 
     Args:
-        piece (str) : Nom et Couleur de la pièce
         pos1 (str): Coordonnées du point A
         pos2 (str): Coordonnées du point B
         echiquier (list): Tableau à 2 dimensions
@@ -224,6 +223,7 @@ def condition_pion(piece, pos1, pos2, echiquier):
     """
     pos1 = reco_coordonnees(pos1)                                                                    # Récupère les indices de l'échiquier correspondant au point A
     pos2 = reco_coordonnees(pos2)                                                                    # Récupère les indices de l'échiquier correspondant au point B
+    piece = pos1.get("x").get("y")                                                                   # Récupère la pièce se trouvant au point A
     if piece == variables.pion_b:                                                                    # Si le pion est blanc :
         if echiquier[pos2.get("x")+2][pos2.get("y")] == echiquier[pos1.get("x")][pos1.get("y")]:         # Si le pion peut effectuer ce déplacement :
             return True                                                                                      # Renvoyer Vrai
@@ -356,7 +356,7 @@ def condition_roi(pos1, pos2):
         return True                                                                     # Renvoyer Vrai
     return False                                                                     # Sinon renvoyer Faux
 
-def deplacement(piece, pos1, pos2, echiquier):
+def deplacement(pos1, pos2, echiquier):
     """Autorise les pièces à se déplacer si elles respectent les conditions requises
 
     Args:
@@ -366,7 +366,7 @@ def deplacement(piece, pos1, pos2, echiquier):
         echiquier (list): Tableau à 2 dimensions
     """
     a = reco_coordonnees(pos1)                                                                                                                                                     # Récupère les indices de l'échiquier correspondant au point A
-    b = reco_coordonnees(pos2)                                                                                                                                                     # Récupère les indices de l'échiquier correspondant au point B
+    piece = a.get("x").get("y")                                                                                                                                                    # Récupère la pièce se trouvant au point A
     if reco_allies(pos1, pos2, echiquier) == False:                                                                                                                                # Si les pièces au point A et au point B ne sont pas alliés :
         if piece == variables.pion_b:                                                                                                                                                  # Si la pièce déplacé est un Pion Blanc :
             if condition_pion(piece, pos1, pos2, echiquier) == True:
@@ -445,7 +445,7 @@ def chess():
         piece = input("Nom de la pièce : ")
         pos1 = input("Quelle est la postion actuelle de la pièce : ")
         pos2 = input("Où veux-tu déplacer cette pièce : ")
-        deplacement(piece, pos1, pos2, echiquier)
+        deplacement(pos1, pos2, echiquier)
         tour_joueur(joueur1, joueur2, prochain_tour)
         afficher_echiquier(echiquier)
 
