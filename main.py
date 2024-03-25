@@ -39,8 +39,8 @@ def creer_echiquier(echiquier):
     echiquier[1][15] = variables.cavalier_n     # Dessine Cavalier Noir Droite
     echiquier[1][7] = variables.fou_n           # Dessine Fou Noir Gauche
     echiquier[1][13] = variables.fou_n          # Dessine Fou Noir Droite
-    echiquier[1][9] = variables.roi_n           # Dessine Roi Noir
-    echiquier[1][11] = variables.reine_n        # Dessine Reine Blanche
+    echiquier[1][9] = variables.reine_n           # Dessine Reine Noir
+    echiquier[1][11] = variables.roi_n        # Dessine Roi Blanche
 
 def tour_joueur(joueur1, joueur2, prochain_tour):
     """Système de tour par tour
@@ -366,7 +366,7 @@ def deplacement(pos1, pos2, echiquier):
         echiquier (list): Tableau à 2 dimensions
     """
     a = reco_coordonnees(pos1)                                                                                                                                                     # Récupère les indices de l'échiquier correspondant au point A
-    piece = a.get("x").get("y")                                                                                                                                                    # Récupère la pièce se trouvant au point A
+    piece = echiquier[a.get("x")][a.get("y")]                                                                                                                                                    # Récupère la pièce se trouvant au point A
     if reco_allies(pos1, pos2, echiquier) == False:                                                                                                                                # Si les pièces au point A et au point B ne sont pas alliés :
         if piece == variables.pion_b:                                                                                                                                                  # Si la pièce déplacé est un Pion Blanc :
             if condition_pion(piece, pos1, pos2, echiquier) == True:
@@ -442,8 +442,7 @@ def chess():
     creer_echiquier(echiquier)
     afficher_echiquier(echiquier)
     while fin_partie == False:
-        piece = input("Nom de la pièce : ")
-        pos1 = input("Quelle est la postion actuelle de la pièce : ")
+        pos1 = input("Quelle est la position actuelle de la pièce : ")
         pos2 = input("Où veux-tu déplacer cette pièce : ")
         deplacement(pos1, pos2, echiquier)
         tour_joueur(joueur1, joueur2, prochain_tour)
