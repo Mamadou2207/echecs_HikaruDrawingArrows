@@ -253,57 +253,111 @@ def condition_pion(pos1, pos2, echiquier):
                 return True                                                                                      # Renvoyer Vrai
     return False                                                                                         # Renvoyer Faux
 
-def condition_tour_verticale(pos1, pos2):
+def obstacle_tour(pos1, pos2, echiquier):
+    """Détecte si une pièce est présente dans la trajectoire de la tour
+
+    Args:
+        pos1 (p-uplet): Indices du tableau du point A
+        pos2 (p-uplet): Indices du tableau du point A
+        echiquier (list): Tableau à 2 dimensions
+
+    Returns:
+        (bool): Vrai ou Faux
+    """
+    piece = echiquier[pos1.get("x")][pos1.get("y")]                  # Récupère la valeur du point A
+    x_max = pos2.get("x")
+    y_max = pos2.get("y")
+    x_min = pos1.get("x")
+    y_min = pos1.get("y")
+    if piece ==  variables.tour_b:
+        while x_min <= x_max or y_min <= y_max:
+            x_min -= 2
+            y_min -= 2
+            if echiquier[x_min][y_min] != " ":
+                return False
+            elif echiquier[x_min][y_min] != " ":
+                return False
+    elif piece ==  variables.tour_n:
+        while x_min <= x_max or y_min <= y_max:
+            x_min += 2
+            y_min += 2
+            if echiquier[x_min][y_min] != " ":
+                return False
+            elif echiquier[x_min][y_min] != " ":
+                return False
+    return True
+
+def condition_tour(pos1, pos2, echiquier):
     """Conditionne le déplacement de la tour en vertical
 
     Args:
         pos1 (str): Coordonnées du point A
         pos2 (str): Coordonnées du point B
+        echiquier (list): Tableau à 2 dimensions
         
     Returns:
         (bool): Vrai ou Faux
     """
-    pos1 = reco_coordonnees(pos1)                           # Récupère les indices de l'échiquier correspondant au point A
-    pos2 = reco_coordonnees(pos2)                           # Récupère les indices de l'échiquier correspondant au point B
-    if pos2.get("y") == pos1.get("y"):                      # Si y2 = y1 :
-        if verif(variables.colonne, pos2.get("x")) == True:     # Si x2 se situe dans les x utilisables :
-            return True                                             # Renvoyer Vrai
-    return False                                            # Sinon renvoyer Faux
+    pos1 = reco_coordonnees(pos1)                            # Récupère les indices de l'échiquier correspondant au point A
+    pos2 = reco_coordonnees(pos2)                            # Récupère les indices de l'échiquier correspondant au point B
+    if pos2.get("y") == pos1.get("y"):                       # Si y2 = y1 :
+        if verif(variables.colonne, pos2.get("x")) == True:      # Si x2 se situe dans les x utilisables :
+            if obstacle_tour(pos1, pos2, echiquier) == True:         # Si aucune pièce est présente sur la trajectoire de la tour :
+                return True                                              # Renvoyer Vrai
+    elif pos2.get("x") == pos1.get("x"):                     # Si x2 = x1 :
+        if verif(variables.ligne, pos2.get("y")) == True:        # Si y2 se situe dans les y utlisables :
+            if obstacle_tour(pos1, pos2, echiquier) == True:         # Si aucune pièce est présente sur la trajectoire de la tour :
+                return True                                              # Renvoyer Vrai
+    return False                                             # Sinon renvoyer Faux
 
-def condition_tour_horizontale(pos1, pos2):
-    """Conditionne le déplacement de la tour en horizontal
+def obstacle_fou(pos1, pos2, echiquier):
+    """Détecte si une pièce est présente dans la trajectoire du fou
 
     Args:
-        pos1 (str): Coordonnées du point A
-        pos2 (str): Coordonnées du point B
+        pos1 (p-uplet): Indices du tableau du point A
+        pos2 (p-uplet): Indices du tableau du point A
+        echiquier (list): Tableau à 2 dimensions
 
     Returns:
-        (bool): Vrai si les conditions sont respectées sinon Faux
+        (bool): Vrai ou Faux
     """
-    pos1 = reco_coordonnees(pos1)                         # Récupère les indices de l'échiquier correspondant au point A
-    pos2 = reco_coordonnees(pos2)                         # Récupère les indices de l'échiquier correspondant au point B
-    if pos2.get("x") == pos1.get("x"):                    # Si x2 = x1 :
-        if verif(variables.ligne, pos2.get("y")) == True:     # Si y2 se situe dans les y utlisables :
-            return True                                           # Renvoyer Vrai
-    return False                                          # Sinon renvoyer Faux
+    if (pos2.get("y") - pos1.get("y")) > 0:
+        ligne_d = 2
+    else:
+        ligne_d = -2                                # direction de la diagonale
+    if (pos2.get("x") - pos1.get("x")) > 0:
+        colonne_d = 2
+    else:
+        colonne_d = -2                              # direction de la diagonale
+    ligne = pos1.get("y") + ligne_d
+    colonne = pos1.get("x") + colonne_d
+    while ligne != pos2.get("y") and colonne != pos2.get("x"):
+        if echiquier[colonne][ligne] != " ":
+            return False
+        ligne += ligne_d
+        colonne += colonne_d
+    return True
 
-def condition_fou_diagonale(pos1, pos2):
+
+def condition_fou(pos1, pos2, echiquier):
     """Conditionne le déplacement du fou
 
     Args:
         pos1 (str): Coordonnées du point A
         pos2 (str): Coordonnées du point B
+        echiquier (list): Tableau à 2 dimensions
 
     Returns:
         (bool): Vrai ou Faux
     """
-    pos1 = reco_coordonnees(pos1)          # Récupère les indices de l'échiquier correspondant au point A
-    pos2 = reco_coordonnees(pos2)          # Récupère les indices de l'échiquier correspondant au point B
-    x = abs(pos2.get("x") - pos1.get("x")) # Valeur absolue de x2 - x1
-    y = abs(pos2.get("y") - pos1.get("y")) # Valeur absolue de y2 - y1
-    if x != y:                             # Si x est différent de y :
-        return False                           # Renvoyer Faux
-    return True                            # Sinon Vrai
+    pos1 = reco_coordonnees(pos1)                     # Récupère les indices de l'échiquier correspondant au point A
+    pos2 = reco_coordonnees(pos2)                     # Récupère les indices de l'échiquier correspondant au point B
+    x = abs(pos2.get("x") - pos1.get("x"))            # Valeur absolue de x2 - x1
+    y = abs(pos2.get("y") - pos1.get("y"))            # Valeur absolue de y2 - y1
+    if x != y:                                        # Si x est différent de y :
+        return False                                      # Renvoyer Faux
+    elif obstacle_fou(pos1, pos2, echiquier) == True: # Si une pièce est présente sur la trajectoire du fou :
+        return True                                       # Renvoyer Vrai
 
 def condition_cavalier(pos1, pos2):
     """Conditionne le déplacement du cavalier
@@ -386,54 +440,46 @@ def deplacement(pos1, pos2, echiquier):
         if piece == variables.pion_b:                                      # Si la pièce déplacée est un Pion Blanc :
             if condition_pion(pos1, pos2, echiquier) == True:                  # Si les conditions sont vérifiées :
                 deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
-                # Non terminé (il manque, le "en passant")
+                                                                                   # Non terminé (il manque, le "en passant")
             else:                                                              # Sinon :
                 print("Tu ne peux pas déplacer le Pion Blanc ici")                 # Afficher message d'erreur
         if piece == variables.pion_n:                                      # Si la pièce déplacée est un Pion Noir :
             if condition_pion(pos1, pos2, echiquier) == True:                  # Si les conditions sont vérifiées :
                 deplacer(pos1, pos2, echiquier)                                    # Autoriser le déplacement
-                # Non terminé (il manque, le "en passant")
+                                                                                   # Non terminé (il manque, le "en passant")
             else:                                                              # Sinon :
                 print("Tu ne peux pas déplacer le Pion Noir ici")                  # Afficher message d'erreur
         if piece == variables.tour_b:                                      # Si la pièce déplacée est un Tour Blanc :
-            if condition_tour_verticale(pos1, pos2) == True:                   # Si les conditions sont vérifiées :
-                deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
-            elif condition_tour_horizontale(pos1, pos2) == True:               # Si les conditions sont vérifiées :
+            if condition_tour(pos1, pos2, echiquier) == True:                  # Si les conditions sont vérifiées :
                 deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
             else:                                                              # Sinon :
                 print("Tu ne peux pas déplacer le Tour Blanche ici")               # Afficher message d'erreur
         if piece == variables.tour_n:                                      # Si la pièce déplacée est un Tour Noir :
-            if condition_tour_verticale(pos1, pos2) == True:                   # Si les conditions sont vérifiées :
-                deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
-            elif condition_tour_horizontale(pos1, pos2) == True:               # Si les conditions sont vérifiées :
+            if condition_tour(pos1, pos2, echiquier) == True:                  # Si les conditions sont vérifiées :
                 deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
             else:                                                              # Sinon :
                 print("Tu ne peux pas déplacer le Tour Noir ici")                  # Afficher message d'erreur
         if piece == variables.fou_b:                                       # Si la pièce déplacée est un Fou Blanc :
-            if condition_fou_diagonale(pos1, pos2) == False:                   # Si les conditions sont vérifiées :
+            if condition_fou(pos1, pos2, echiquier) == False:                  # Si les conditions sont vérifiées :
                 deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
             else:                                                              # Sinon :
                 print("Tu ne peux pas déplacer le Fou Blanc ici")                  # Afficher message d'erreur
         if piece == variables.fou_n:                                       # Si la pièce déplacée est un Fou Noir :
-            if condition_fou_diagonale(pos1, pos2) == False:                   # Si les conditions sont vérifiées :
+            if condition_fou(pos1, pos2, echiquier) == False:                  # Si les conditions sont vérifiées :
                 deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
             else:                                                              # Sinon :
                 print("Tu ne peux pas déplacer le Fou Noir ici")                   # Afficher message d'erreur
         if piece == variables.reine_b:                                     # Si la pièce déplacée est un Reine Blanc :
-            if condition_fou_diagonale(pos1, pos2) == False:                   # Si les conditions sont vérifiées :
+            if condition_fou(pos1, pos2, echiquier) == False:                  # Si les conditions sont vérifiées :
                 deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
-            elif condition_tour_verticale(pos1, pos2) == True:                 # Si les conditions sont vérifiées :
-                deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
-            elif condition_tour_horizontale(pos1, pos2) == True:               # Si les conditions sont vérifiées :
+            elif condition_tour(pos1, pos2, echiquier) == True:                # Si les conditions sont vérifiées :
                 deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
             else:                                                              # Sinon :
                 print("Tu ne peux pas déplacer la Reine Blanche ici")              # Afficher message d'erreur    
         if piece == variables.reine_n:                                     # Si la pièce déplacée est un Reine Noir :
-            if condition_fou_diagonale(pos1, pos2) == False:                   # Si les conditions sont vérifiées :
+            if condition_fou(pos1, pos2, echiquier) == False:                  # Si les conditions sont vérifiées :
                 deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
-            elif condition_tour_verticale(pos1, pos2) == True:                 # Si les conditions sont vérifiées :
-                deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
-            elif condition_tour_horizontale(pos1, pos2) == True:               # Si les conditions sont vérifiées :
+            elif condition_tour(pos1, pos2, echiquier) == True:                # Si les conditions sont vérifiées :
                 deplacer(pos1, pos2, echiquier)                                    # Déplacer la pièce du point A au point B
             else:                                                              # Sinon :
                 print("Tu ne peux pas déplacer la Reine Noire ici")                # Afficher message d'erreur    
